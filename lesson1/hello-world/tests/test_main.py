@@ -20,3 +20,14 @@ async def test_increment(flet_app: ftt.FletTestApp):
 
     # New state
     assert (await tester.find_by_text("1")).count == 1
+
+
+async def test_decrement(flet_app: ftt.FletTestApp):
+    tester = flet_app.tester
+
+    await tester.pump_and_settle()
+
+    await tester.tap(await tester.find_by_key("decrement"))
+    await tester.pump_and_settle()
+
+    assert (await tester.find_by_text("-1")).count == 1
